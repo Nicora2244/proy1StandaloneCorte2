@@ -11,42 +11,48 @@
     </ion-toolbar>
   </ion-header>
 
+  <!-- List of barcodes -->
   <ion-list>
     @for (barcode of barcodes; track barcode) {
-    <ion-item >
+    <ion-item>
       <ion-label position="stacked">{{ barcode.format }}</ion-label>
       <ion-input type="text" [value]="barcode.rawValue"></ion-input>
     </ion-item>
     }
   </ion-list>
 
+  <!-- FAB Button -->
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button (click)="scan()" [disabled]="!isSupported">
       <ion-icon name="scan"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
+  <!-- Personajes List -->
   <app-personaje-list 
-  [personajes]="personajes" 
-  [titulo]="'Favoritos'" 
-  [subtitulo]="'Ricky & Morty'">
-  </app-personaje-list> 
-  
+    [personajes]="personajes" 
+    [titulo]="'Favoritos'" 
+    [subtitulo]="'Ricky & Morty'">
+  </app-personaje-list>
+
+  <!-- User Location -->
   <ion-list>
-  @if (latitude && longitude) {
+    @if (latitude && longitude) {
     <ion-item>
       <ion-label position="stacked">Your Location</ion-label>
       <ion-input type="text" [value]="'Latitude: ' + latitude"></ion-input>
       <ion-input type="text" [value]="'Longitude: ' + longitude"></ion-input>
     </ion-item>
-  }
+    }
 
-  @if (errorMessage) {
+    @if (errorMessage) {
     <ion-item>
       <ion-label position="stacked">Error</ion-label>
       <ion-input type="text" [value]="errorMessage"></ion-input>
     </ion-item>
-  }
-</ion-list> 
+    }
+  </ion-list>
 
+  <!-- Google Maps -->
+  <div #mapElement style="height: 400px; width: 100%; margin-top: 20px;"></div>
 </ion-content>
