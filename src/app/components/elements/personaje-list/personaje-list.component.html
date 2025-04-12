@@ -1,0 +1,27 @@
+<ion-list class="ion-padding-top">
+  <ion-list-header>
+    <ion-label
+      ><strong>{{ titulo }} - {{ subtitulo }}</strong></ion-label
+    >
+  </ion-list-header>
+
+  @for (personaje of personajes; track id_episodio + '_' + $index;let i = $index) {
+  <ion-item>
+    <ion-avatar slot="start">
+      <img alt="Silhouette of a person's head" [src]="personaje.image" />
+    </ion-avatar>
+    <ion-label (click)="verPersonaje(personaje.id)">
+      <strong>{{personaje.id}}.</strong> {{ personaje.name }} - {{ personaje.species }} -
+      {{ personaje.status }}
+    </ion-label>
+
+    <ion-buttons>
+      <ion-button (click)="addFavorito(personaje)" aria-label="Favorite">
+        <ion-icon color="danger" [name]= "esFavorito(personaje)? 'heart': 'heart-outline'" slot="icon-only"aria-hidden="true"></ion-icon>
+      </ion-button>  
+    </ion-buttons>
+
+
+  </ion-item>
+  }
+</ion-list>

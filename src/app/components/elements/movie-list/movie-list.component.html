@@ -1,0 +1,24 @@
+<ion-list>
+  @for( item of movies; track item.id){
+  <ion-item button [routerLink]="['/details',item.id]">
+    <ion-avatar slot="start">
+
+      <img alt="Imagen Pelicula" [src]="imageBaseUrl + '/w92' + item.poster_path" />
+
+    </ion-avatar>
+
+    <ion-label>
+      <h3>{{item.title}}</h3>
+      <p>{{item.release_date | date: 'y'}}</p>
+    </ion-label>
+
+    <ion-badge slot="end">{{item.vote_average}}</ion-badge>
+  </ion-item>
+
+  }@empty {
+  <ion-item lines="none">
+    <ion-label class="ion-text-center">No movies Found...</ion-label>
+  </ion-item>
+
+  }
+</ion-list>

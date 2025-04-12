@@ -1,0 +1,53 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Episodios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Compras</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <app-episodio-list [episodios]="episodios" [titulo]="titulo1" [subtitulo]="subtitulo1">
+  </app-episodio-list>
+
+  <!--
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Episodios</ion-card-title>
+      <ion-card-subtitle>Detalle</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list *ngFor="let episodio of episodios">
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img
+              alt="Silhouette of mountains"
+              src="{{episodio.image}}"
+            />
+          </ion-thumbnail>
+          <ion-label>{{episodio.name}}</ion-label>
+        </ion-item>
+
+        <app-personaje-list 
+        [personajes]="episodio.characters" 
+        [titulo]="titulo1" 
+        [subtitulo]="subtitulo1">
+        </app-personaje-list>
+      
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  -->
+
+  @if (!completado){
+  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+    <ion-infinite-scroll-content loadingText="Espere por Favor..."
+      loadingSpinner="bubbles"></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  }
+</ion-content>

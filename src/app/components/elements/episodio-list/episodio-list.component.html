@@ -1,0 +1,62 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>{{ titulo }}</ion-card-title>
+    <ion-card-subtitle>{{ subtitulo }}</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-list>
+      @for (episodio of episodios; track episodio.id; let i = $index) {
+
+      <ion-item color="primary">
+        <ion-thumbnail slot="start">
+          <img alt="Silhouette of mountains" src="{{ episodio.image }}" />
+        </ion-thumbnail>
+        <ion-label (click)="verEpisodio(episodio.id)"
+          >{{ episodio.name }} - {{ episodio.episode }} -
+          {{ episodio.air_date }}</ion-label
+        >
+      </ion-item>
+
+      <ion-accordion-group>
+        <ion-accordion value="first">
+          <ion-item slot="header" color="light">
+            <ion-icon name="people" color="primary" slot="start"></ion-icon>
+            <ion-label><strong>Personajes</strong></ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <app-personaje-list
+              [personajes]="episodio.characters"
+              [titulo]="titulo1 + ' ' + episodio.name"
+              [subtitulo]="subtitulo1"
+              [id_episodio]="episodio.episode"
+            >
+            </app-personaje-list>
+          </div>
+        </ion-accordion>
+
+        <!--
+        @if( i<=10 ){
+          <ion-accordion value="Second">
+            <ion-item slot="header" color="light">
+              <ion-icon name="images" color="primary" slot="start"></ion-icon>
+              <ion-label><strong>Fotos Personajes</strong></ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+  
+              
+              <app-swiper-slides [images]="episodio.characters | fotosPersonajes"></app-swiper-slides>
+              
+  
+            </div>
+          </ion-accordion>
+    
+        }
+        -->
+
+
+      </ion-accordion-group>
+
+      }
+    </ion-list>
+  </ion-card-content>
+</ion-card>

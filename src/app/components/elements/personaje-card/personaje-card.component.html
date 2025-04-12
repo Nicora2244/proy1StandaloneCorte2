@@ -1,0 +1,13 @@
+@if (personaje) {
+<ion-card>
+  <img alt="Foto del Personaje" src="{{personaje.image}}" />
+  <ion-card-header>
+    <ion-card-title>{{personaje.name}}</ion-card-title>
+    <ion-card-subtitle><strong>Detalles</strong></ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-content>
+    <strong>Especie:</strong> {{personaje.species}} <strong>Status:</strong>{{personaje.status}} 
+  </ion-card-content>
+</ion-card>
+}

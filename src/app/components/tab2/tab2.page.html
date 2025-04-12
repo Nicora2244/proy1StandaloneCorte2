@@ -1,0 +1,52 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> Personajes </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Personajes</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <app-explore-container name="Personajes page"></app-explore-container>
+
+
+  <!--
+  <ion-list class="ion-padding-top">
+    <ion-list-header>
+      <ion-label><strong>{{titulo1}} - {{subtitulo1}}</strong></ion-label>
+    </ion-list-header>
+
+    <ion-item *ngFor="let personaje of personajes">
+      <ion-avatar slot="start">
+        <img alt="Silhouette of a person's head" src="{{personaje.image}}" />
+      </ion-avatar>
+      <ion-label
+        >{{personaje.name}} - {{personaje.species}} -
+        {{personaje.status}}</ion-label
+      >
+    </ion-item>
+  </ion-list>
+  
+    *ngIf="!completado"
+  -->
+
+
+  <app-personaje-list 
+  [personajes]="personajes" 
+  [titulo]="titulo1" 
+  [subtitulo]="subtitulo1"
+  [id_episodio]="'E1'"></app-personaje-list>
+
+
+  @if (!completado){
+  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+    <ion-infinite-scroll-content loadingText="Espere por Favor..."
+      loadingSpinner="bubbles"></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  }
+
+</ion-content>

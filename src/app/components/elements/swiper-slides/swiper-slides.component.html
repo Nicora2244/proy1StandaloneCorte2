@@ -1,0 +1,34 @@
+<!-- Slider main container -->
+<ion-toolbar>
+  <ion-title slot="start">{{titulo}}</ion-title>
+  <ion-buttons slot="end">
+    <ion-button (click)="goPrev()" color="primary">
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-button>
+    <ion-button (click)="goNext()" color="tertiary">
+      <ion-icon name="arrow-forward"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+</ion-toolbar>
+
+<div class="swiper-container">
+  <!-- Additional required wrapper -->
+  <div class="swiper-wrapper">
+    <!-- Slides -->
+    @for( image of images; track image){
+    <div class="swiper-slide">
+      <img [src]="image" alt="Imagen Slide" />
+    </div>
+    }
+  </div>
+
+  <!-- If we need pagination -->
+  <div class="swiper-pagination"></div>
+
+  <!-- If we need navigation buttons -->
+  <div class="swiper-button-prev" (click)="goPrev()"></div>
+  <div class="swiper-button-next" (click)="goNext()"></div>
+
+  <!-- If we need scrollbar -->
+  <div class="swiper-scrollbar"></div>
+</div>

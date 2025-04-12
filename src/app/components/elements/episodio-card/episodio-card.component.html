@@ -1,0 +1,73 @@
+@if(episodio){
+  
+<ion-card>
+  
+  <img alt="Silhouette of mountains" [src]="episodio.image" />
+ 
+  <ion-card-header>
+    <ion-card-title>{{ episodio.name }}</ion-card-title>
+    <ion-card-subtitle>{{ episodio.episode}}</ion-card-subtitle>
+
+    <ion-item lines="none">
+      <ion-icon name="calendar-outline" slot="start"></ion-icon>
+      <ion-label>{{ episodio.air_date | date : "y" }}</ion-label>
+    </ion-item>
+
+    <!--
+    <ion-text color="tertiary">
+      @for(g of episodio.genres; track g.id;let isLast = $last;){
+        <span> {{g.name}}{{ !isLast ? ',' : ''}}</span>
+      }
+    </ion-text>
+    -->
+
+    <ion-toolbar>
+      <!--
+      <ion-title slot="start">Seleccione.</ion-title>
+      -->
+      <ion-buttons slot="start">
+        
+        <ion-button (click)="changeView('lista')" color="primary">
+          <ion-icon name="list"></ion-icon>
+          @if(tipoVista == 'lista'){
+            <ion-label>{{mensajeVista}}</ion-label>
+          }
+        </ion-button>
+        <ion-button (click)="changeView('imagen')" color="tertiary">
+          <ion-icon name="images"></ion-icon>
+          @if(tipoVista == 'imagen'){
+            <ion-label>{{mensajeVista}}</ion-label>
+          }
+        </ion-button>
+
+        <ion-button (click)="changeView('nada')" color="danger">
+          <ion-icon name="close-circle"></ion-icon>
+          @if(tipoVista == 'nada'){
+            <ion-label>{{mensajeVista}}</ion-label>
+          }
+        </ion-button>
+
+      </ion-buttons>
+    </ion-toolbar>
+
+  </ion-card-header>
+
+  <ion-card-content>
+ 
+    @if(tipoVista == 'imagen'){
+      <app-swiper-slides [images]="episodio.characters | fotosPersonajes" [titulo]="'Personajes Episodio.'"></app-swiper-slides>
+    }
+    
+    @if(tipoVista == 'lista'){
+      <app-personaje-list
+      [personajes]="episodio.characters"
+      [titulo]="titulo1 + ' ' + episodio.name"
+      [subtitulo]="subtitulo1"
+      [id_episodio]="episodio.episode"
+    >
+    </app-personaje-list>
+      } 
+
+  </ion-card-content>
+</ion-card>
+}

@@ -1,0 +1,30 @@
+<!--
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>episodioDetail</ion-title>
+  </ion-toolbar>
+</ion-header>
+-->
+
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{episodio()?.name}}</ion-title>
+
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">episodioDetail</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  @if (episodio(); as episodio) {
+  <app-episodio-card [episodio]="episodio"></app-episodio-card>
+  }
+</ion-content>
