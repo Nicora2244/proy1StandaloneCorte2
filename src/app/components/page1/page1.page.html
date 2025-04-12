@@ -19,18 +19,34 @@
     </ion-item>
     }
   </ion-list>
+
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button (click)="scan()" [disabled]="!isSupported">
       <ion-icon name="scan"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
-  <!--
   <app-personaje-list 
   [personajes]="personajes" 
   [titulo]="'Favoritos'" 
   [subtitulo]="'Ricky & Morty'">
   </app-personaje-list> 
-  -->
+  
+  <ion-list>
+  @if (latitude && longitude) {
+    <ion-item>
+      <ion-label position="stacked">Your Location</ion-label>
+      <ion-input type="text" [value]="'Latitude: ' + latitude"></ion-input>
+      <ion-input type="text" [value]="'Longitude: ' + longitude"></ion-input>
+    </ion-item>
+  }
+
+  @if (errorMessage) {
+    <ion-item>
+      <ion-label position="stacked">Error</ion-label>
+      <ion-input type="text" [value]="errorMessage"></ion-input>
+    </ion-item>
+  }
+</ion-list> 
 
 </ion-content>

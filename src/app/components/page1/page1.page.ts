@@ -6,6 +6,8 @@ import { StorageService } from 'src/app/services/storage.service';
 import { PersonajeListComponent } from '../elements/personaje-list/personaje-list.component';
 
 import { Barcode, BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
+import { GeolocationService } from 'src/app/services/geolocation.service';
+
 
 import { AlertController} from '@ionic/angular';
 import { addIcons } from 'ionicons';
@@ -18,13 +20,14 @@ import { scan } from 'ionicons/icons';
   styleUrls: ['./page1.page.scss'],
   standalone: true,
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,
-      //PersonajeListComponent,
-      
-      IonList,IonItem,IonInput,IonLabel,IonFab,IonFabButton,IonIcon]
+            PersonajeListComponent,IonList,IonItem,IonInput,IonLabel,IonFab,IonFabButton,IonIcon]
 })
 export class Page1Page implements OnInit {
   isSupported = false;
   barcodes: Barcode[] = [];
+  latitude: number | null = null;
+  longitude: number | null = null;
+  errorMessage: string = ''; 
 
 
   get personajes(): any[] {
@@ -32,15 +35,16 @@ export class Page1Page implements OnInit {
   }
     
   constructor( private storageService: StorageService, 
-    private alertController: AlertController ) {
+    private alertController: AlertController, 
+    private geolocationService: GeolocationService) {
       addIcons({scan});
-
-
   }
 
   ngOnInit() {
     //this.personajes = this.storageService.getLocalPersonajes;
     console.log("PER_STORAGE:",this.personajes);
+
+    this.getUserLocation();
 
     BarcodeScanner.isSupported().then((result) => {
       this.isSupported = result.supported;
@@ -72,6 +76,16 @@ export class Page1Page implements OnInit {
     await alert.present();
   }
 
-
+  async getUserLocation() {
+    try {
+      const location = await this.geolocationService.getCurrentLocation();
+      this.latitude = location.latitude;
+      this.longitude = location.longitude;
+      console.log(`Latitude: ${this.latitude}, Longitude: ${this.longitude}`);
+    } catch (error) {
+      this.errorMessage = error as string;
+      console.error('Error fetching location:', this.errorMessage);
+    }
+  }
 }
 
